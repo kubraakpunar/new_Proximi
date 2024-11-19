@@ -44,7 +44,11 @@ DJANGO_APPS = [
 
 LOCAL_APPS = [
     "user_service",
+    "profile_service",
+    "event_service",
     "api.user",
+    "api.profile",
+    "api.event"
 ]
 
 THIRD_PARTY_APPS = [
@@ -52,6 +56,8 @@ THIRD_PARTY_APPS = [
     "storages",
     "django_celery_beat",
     "django_celery_results",
+    "rest_framework_simplejwt",
+    "drf_yasg",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -144,3 +150,23 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user_service.User' 
+
+SITE_ID = 1 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',  # Giriş gerekli
+    ),
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # Erişim jetonunun geçerlilik süresi
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Yenileme jetonunun geçerlilik süresi
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+}
