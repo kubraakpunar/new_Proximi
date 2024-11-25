@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from .serializers import ( 
     UserSerializer
 ) 
-from user_service.models import ( 
+from services.user_service.models import ( 
     User
 )
 from django.conf import settings 

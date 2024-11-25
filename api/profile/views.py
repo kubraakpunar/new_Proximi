@@ -3,7 +3,7 @@ from .serializers import (
     ProfileSerializer,
     InterestSerializer
 )
-from profile_service.models import(
+from services.profile_service.models import(
     Profile,
     Interest
 )

@@ -43,9 +43,9 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
-    "user_service",
-    "profile_service",
-    "event_service",
+    "services.user_service",
+    "services.profile_service",
+    "services.event_service",
     "api.user",
     "api.profile",
     "api.event",

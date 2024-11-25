@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from event_service.models import ( 
+from services.event_service.models import ( 
     Event,
     EventLocation,
     EventRating,

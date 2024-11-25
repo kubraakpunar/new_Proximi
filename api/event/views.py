@@ -5,7 +5,7 @@ from .serializers import (
     EventScheduleSerializer,
     EventRatingSerializer
 )
-from event_service.models import(
+from services.event_service.models import(
     Event,
     EventRating,
     EventLocation,

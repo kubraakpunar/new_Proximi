@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class EventServiceConfig(AppConfig):
+class UserServiceConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'event_service'
+    name = 'services.user_service'
