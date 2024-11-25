@@ -3,9 +3,10 @@ from django.contrib.auth.models import AbstractUser
 import uuid 
 from django.utils.translation import gettext_lazy as _
 from user_service.models import User 
+from core.models import BaseModel
 from django.contrib.auth import get_user_model
 
-class Event(models.Model):
+class Event(BaseModel):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=500, blank=True, null=True)
     organizer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="organized_events")
@@ -15,7 +16,7 @@ class Event(models.Model):
     def __str__(self):
         return self.name
     
-class EventSchedule(models.Model):
+class EventSchedule(BaseModel):
     event = models.OneToOneField(Event, on_delete=models.CASCADE, related_name='schedule')
     start_date = models.DateTimeField()
     end_date = models.DateTimeField() 
@@ -23,7 +24,7 @@ class EventSchedule(models.Model):
     def __str__(self):
         return f"{self.event.name} - Schedule"
     
-class EventLocation(models.Model):
+class EventLocation(BaseModel):
     event = models.OneToOneField(Event, on_delete=models.CASCADE, related_name='location')
     location_name = models.CharField(max_length=200, blank=True, null=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
@@ -32,7 +33,7 @@ class EventLocation(models.Model):
     def __str__(self):
         return f"{self.event.name} - Location"
     
-class EventRating(models.Model):
+class EventRating(BaseModel):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="event_ratings", null=True)
     event = models.OneToOneField(Event, on_delete=models.CASCADE, related_name="rating")
     rating = models.DecimalField(max_digits=5, decimal_places=2,default=0.0)
