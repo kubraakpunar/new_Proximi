@@ -39,9 +39,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/', include('user_service.urls')),
-    path('api/', include('profile_service.urls')),
-    path('api/', include('event_service.urls')),
+    path('api/', include('services.user_service.urls')),
+    path('api/', include('services.profile_service.urls')),
+    path('api/', include('services.event_service.urls')),
 
     #Swagger 
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0),

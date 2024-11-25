@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 import uuid 
 from django.utils.translation import gettext_lazy as _
-from user_service.models import User 
+from services.user_service.models import User 
 from core.models import BaseModel
 from django.contrib.auth import get_user_model
 
