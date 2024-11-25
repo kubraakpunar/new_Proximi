@@ -12,3 +12,4 @@ django_celery_beat
 django_celery_results
 djangorestframework-simplejwt
 drf-yasg
+django-cors-headers

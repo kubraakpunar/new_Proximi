@@ -48,7 +48,8 @@ LOCAL_APPS = [
     "event_service",
     "api.user",
     "api.profile",
-    "api.event"
+    "api.event",
+    "core"
 ]
 
 THIRD_PARTY_APPS = [
@@ -58,6 +59,7 @@ THIRD_PARTY_APPS = [
     "django_celery_results",
     "rest_framework_simplejwt",
     "drf_yasg",
+    "corsheaders"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -71,6 +73,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+MIDDLEWARE = ['corsheaders.middleware.CorsMiddleware'] + MIDDLEWARE
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
 ]
 
 ROOT_URLCONF = 'config.urls'
