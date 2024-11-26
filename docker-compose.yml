@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: kubra
       POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: user_service_db
+      POSTGRES_DB: pro_db
     ports:
       - "5433:5432"
     volumes:

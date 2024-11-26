@@ -19,7 +19,7 @@ class BaseModel(models.Model):
             if isinstance(self.updated_by, AnonymousUser):
                 self.updated_by = None  # AnonymousUser olduğunda None ata
             else:
-                self.updated_by = self.updated_by.uuid  # Geçerli User ise UUID ata
+                self.updated_by = self.updated_by  # Geçerli User ise UUID ata
         else:
             self.updated_by = None  # Geçersiz User nesnesi ise None ata
         
