@@ -1,4 +1,5 @@
 from threading import local 
+
 _user = local() 
 
 class CurrentUserMiddleware:

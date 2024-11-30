@@ -7,6 +7,8 @@ from services.event_service.models import (
 )
 
 class EventSerializer(serializers.ModelSerializer):
+    rating = serializers.IntegerField(read_only=True)
+    rating_count = serializers.IntegerField(read_only=True)
     class Meta:
         model = Event
         fields = ['name', 'description', 'organizer','rating','rating_count', 'created_at', 'updated_at']
