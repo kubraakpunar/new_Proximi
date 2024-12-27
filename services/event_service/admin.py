@@ -3,7 +3,7 @@ from .models import Event,EventLocation,EventRating,EventSchedule
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'organizer', 'created_at', 'updated_at')
+    list_display = ('name', 'description', 'average_rating', 'organizer', 'created_at', 'updated_at')
     search_fields = ('name', 'organizer') 
 
 

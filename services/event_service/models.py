@@ -5,6 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from services.user_service.models import User 
 from core.models import BaseModel
 from django.contrib.auth import get_user_model
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db.models import Avg
 
 class Event(BaseModel):
     name = models.CharField(max_length=200)
@@ -13,7 +15,12 @@ class Event(BaseModel):
     rating = models.FloatField(default=0.0)
     rating_count = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True) 
+    updated_at = models.DateTimeField(auto_now=True)  
+
+    @property
+    def average_rating(self):
+        average = self.ratings.aggregate(average=Avg('rating'))['average']
+        return round(average, 2) if average is not None else 0.0
 
     def add_rating(self, user, new_rating):
         existing_rating = EventRating.objects.filter(user=user, event=self).first()
@@ -50,7 +57,10 @@ class EventLocation(BaseModel):
 class EventRating(BaseModel):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="event_ratings", null=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="ratings")
-    rating = models.DecimalField(max_digits=5, decimal_places=2,default=0.0)
+    rating = models.DecimalField(default=0.0, max_digits=3, decimal_places=1, validators=[
+                                            MinValueValidator(1), 
+                                            MaxValueValidator(5)], 
+                                            help_text="Rating must be between 1 and 5.")
 
     def __str__(self):
         return f"{self.event.name} - Rating"
